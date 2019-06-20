@@ -21,13 +21,14 @@
   </div>
   
   <div fxFlex *ngIf="selectedDish">
+   
     <mat-card>
       <mat-card-header>
         <mat-card-title>
           <h3>{{selectedDish.name | uppercase}}</h3>
         </mat-card-title>
       </mat-card-header>
-      <img mat-card-image src={{selectedDish.image}} alt={{selectedDish.name}}>
+      <img mat-card-image img mat-card-lg-image src={{selectedDish.image}} alt={{selectedDish.name}}>
       <mat-card-content>
         <p>{{selectedDish.description}}
         </p>
@@ -37,6 +38,8 @@
         <button mat-button>SHARE</button>
       </mat-card-actions>
     </mat-card>
+    
   </div>
+  
 
 </div>
