@@ -20,10 +20,17 @@ export class MenuComponent implements OnInit {
 
   constructor(private dishService: DishService) { }
   ngOnInit() {
+    // with observables
+    this.dishService.getDishes().subscribe(dishes => this.dishes = dishes);
+
+    // before promises
     // this.dishes = this.dishService.getDishes();
+    /* with promises
     this.dishService.getDishes()
       .then(dishes => this.dishes = dishes);
+      */
   }
+
 
   onSelect(dish: Dish) {
     this.selectedDish = dish;
