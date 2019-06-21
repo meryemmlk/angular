@@ -13,26 +13,41 @@ export class DishService {
   constructor() { }
 
   getDishes(): Promise<Dish[]> {
+    return new Promise(resolve => {
+      // Simulate server latency with 2 second delay
+        setTimeout(() => resolve(DISHES), 2000);
+    });
+  }
+  getDish(id: string): Promise<Dish> {
+    return new Promise ( resolve => {
+      // Simulate server latency with 2 second delay
+        setTimeout(() => resolve(DISHES.filter((dish) => (dish.id === id))[0]), 2000);
+    });
+  }
+  getFeaturedDish(): Promise<Dish> {
+    return  new Promise ( resolve => {
+      // Simulate server latency with 2 second delay
+        setTimeout(() => resolve(DISHES.filter((dish) => dish.featured)[0]), 2000);
+    });
+  }
+/* initial promises
+  getDishes(): Promise<Dish[]> {
     return Promise.resolve(DISHES);
   }
-
   getDish(id: number): Promise<Dish> {
     return Promise.resolve(DISHES.filter((dish) => (+dish.id === id))[0]);
   }
-
   getFeaturedDish(): Promise<Dish> {
     return Promise.resolve(DISHES.filter((dish) => dish.featured)[0]);
   }
-
+*/
   /* version before promises
   getDishes(): Dish[] {
     return DISHES;
   }
-
   getDish(id: string): Dish {
     return DISHES.filter((dish) => (dish.id === id))[0];
   }
-
   getFeaturedDish(): Dish {
     return DISHES.filter((dish) => dish.featured)[0];
   }*/
