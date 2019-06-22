@@ -3,7 +3,8 @@ import { Dish } from '../shared/dish';
 // no longer needed as constant. We will get from server side  import { DISHES } from '../shared/dishes';
 
 
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 
 // import { map } from 'rxjs/operators';
@@ -44,6 +45,22 @@ export class DishService {
   getDishIds(): Observable<number[] | any> {
     return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)))
       .pipe(catchError(error => error));
+  }
+    
+  postComment(dishId: string, comment: any) {
+    return this.http.post(baseURL + 'dishes/' + dishId + '/comments', comment)
+    .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+    
+  putDish(dish: Dish): Observable<Dish> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.put<Dish>(baseURL + 'dishes/' + dish.id, dish, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
   }
 
 /*****************************************/
