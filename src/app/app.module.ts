@@ -19,6 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
 import { baseURL } from './shared/baseurl';
 
 import { AppComponent } from './app.component';
@@ -77,7 +79,8 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [DishService,
               PromotionService,
-             LeaderService,
+              LeaderService,
+              ProcessHTTPMsgService,
               {provide: 'baseURL', useValue: baseURL}
              ],
   entryComponents: [

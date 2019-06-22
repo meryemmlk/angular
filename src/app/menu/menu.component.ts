@@ -15,6 +15,7 @@ import { DishService } from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   dishes: Dish[];
+  errMess: string;
 
   // selectedDish: Dish;
 
@@ -23,14 +24,19 @@ export class MenuComponent implements OnInit {
     @Inject('baseURL') private baseURL) { }
 
   ngOnInit() {
-    // with observables
-    this.dishService.getDishes().subscribe(dishes => this.dishes = dishes);
+    // with error handling
+    this.dishService.getDishes()
+    .subscribe(dishes => this.dishes = dishes,
+      errmess => this.errMess = <any>errmess);
 
-    // before promises
-    // this.dishes = this.dishService.getDishes();
+    // with observables
+    // this.dishService.getDishes().subscribe(dishes => this.dishes = dishes);
     // with promises
     // this.dishService.getDishes()
     //  .then(dishes => this.dishes = dishes);
+    // before promises
+    // this.dishes = this.dishService.getDishes();
+
   }
 
 /* not used anymore

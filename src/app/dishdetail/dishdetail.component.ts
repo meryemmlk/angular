@@ -17,6 +17,7 @@ export class DishdetailComponent implements OnInit {
   dish: Dish;
 
   dishIds: string[];
+  errMess: string;
   prev: string;
   next: string;
 
@@ -29,7 +30,8 @@ export class DishdetailComponent implements OnInit {
     console.log('here1');
     this.dishservice.getDishIds().subscribe(dishIds =>{ this.dishIds = dishIds; console.log('here3'); });
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); console.log('here2'); });
+    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+              errmess => this.errMess = <any>errmess);
   }
 
   setPrevNext(dishId: string) {
